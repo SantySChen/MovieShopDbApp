@@ -18,6 +18,11 @@ namespace Infrastructure.Repositories
             _context = c;
         }
 
+        public Movie GetHighestGrossingMovie()
+        {
+            return _context.Movies.OrderByDescending(x => x.Revenue).FirstOrDefault();
+        }
+
         public IEnumerable<Movie> GetTopMovies(int number = 20)
         {
             return _context.Movies.OrderBy(x => x.Id).Take(number).ToList();
@@ -27,5 +32,7 @@ namespace Infrastructure.Repositories
         {
             return _context.Movies.OrderByDescending(x => x.Revenue).Take(number).Include(x => x.Genres).ToList();
         }
+
+        
     }
 }

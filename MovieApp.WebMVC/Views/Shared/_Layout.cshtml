@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/MovieApp.WebMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <partial name="_Header"></partial>
+    <partial name="_Header" model="@(ViewData["Genres"])" />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

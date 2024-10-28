@@ -1,4 +1,4 @@
-﻿@model MovieGenreViewModel;
+﻿@model IEnumerable<Movie>;
 
 @{
     ViewData["Title"] = "Movie Shop";
@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        @foreach(var item in Model.Movies)
+        @foreach(var item in Model)
         {
             <div class="col-lg-2">
                 <div class="card">

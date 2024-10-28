@@ -12,5 +12,8 @@ namespace ApplicationCore.Contracts.Repositories
         IEnumerable<Movie> GetTopRevenueMovies(int number = 20);
 
         IEnumerable<Movie> GetTopMovies(int number = 20);
+
+        Movie GetHighestGrossingMovie();
+        
     }
 }

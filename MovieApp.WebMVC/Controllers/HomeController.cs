@@ -1,5 +1,7 @@
 using ApplicationCore.Contracts.Services;
+using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using MovieApp.WebMVC.Models;
 using System.Diagnostics;
 
@@ -16,19 +18,17 @@ namespace MovieApp.WebMVC.Controllers
             _genreService = genreService;
         }
 
+        //public IActionResult GetHeaderPartial()
+        //{
+        //    var genres = _genreService.GetAllGenre();
+        //    return PartialView("_Header", genres);
+        //}
+    
         public IActionResult Index()
         {
-            var result = new MovieGenreViewModel
-            {
-                Movies = _movieService.GetTopMovies(24),
-                Genres = _genreService.GetAllGenre()
-            };
+            var result = _movieService.GetTopMovies(24);
+            ViewData["Genres"] = _genreService.GetAllGenre();
             return View(result);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
