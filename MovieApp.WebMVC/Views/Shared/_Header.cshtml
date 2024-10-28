@@ -1,4 +1,6 @@
-﻿<header>
+﻿@model MovieGenreViewModel;
+
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <div>
@@ -9,7 +11,10 @@
                         GENRES
                     </button>
                     <ul class="dropdown-menu text-white">
-                        <li><a asp-action="" asp-controller="Movie">asa</a></li>
+                        @foreach(var item in Model.Genres)
+                        {
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Genre" asp-route-id="@item.Id">@item.Name</a></li>
+                        }
                     </ul>
                 </div>
             </div>

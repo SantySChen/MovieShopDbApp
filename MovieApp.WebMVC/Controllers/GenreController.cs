@@ -66,5 +66,7 @@ namespace MovieApp.WebMVC.Controllers
             _genreService.DeleteGenre(genre.Id);
             return RedirectToAction("Index");
         }   
+
+        
     }
 }

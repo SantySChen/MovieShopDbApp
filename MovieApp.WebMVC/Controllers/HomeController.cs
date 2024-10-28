@@ -8,16 +8,22 @@ namespace MovieApp.WebMVC.Controllers
     public class HomeController : Controller
     {
         private readonly IMovieService _movieService;
+        private readonly IGenreService _genreService;
 
-        public HomeController(IMovieService movieService)
+        public HomeController(IMovieService movieService, IGenreService genreService)
         {
             _movieService = movieService;
+            _genreService = genreService;
         }
 
         public IActionResult Index()
         {
-            var movies = _movieService.GetTopMovies(24);
-            return View(movies);
+            var result = new MovieGenreViewModel
+            {
+                Movies = _movieService.GetTopMovies(24),
+                Genres = _genreService.GetAllGenre()
+            };
+            return View(result);
         }
 
         public IActionResult Privacy()
