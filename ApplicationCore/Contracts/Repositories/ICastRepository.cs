@@ -9,5 +9,7 @@ namespace ApplicationCore.Contracts.Repositories
 {
     public interface ICastRepository : IRepository<Cast>
     {
+        IEnumerable<Movie> GetById(int id);
+        Cast GetCastDetails(int id);
     }
 }

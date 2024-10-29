@@ -16,5 +16,10 @@ namespace MovieApp.WebMVC.Controllers
         {
             return View();
         }
+
+        public IActionResult Details()
+        {
+            return View();
+        }
     }
 }

@@ -14,6 +14,10 @@ namespace ApplicationCore.Contracts.Repositories
         IEnumerable<Movie> GetTopMovies(int number = 20);
 
         Movie GetHighestGrossingMovie();
-        
+
+        IEnumerable<string> GetGenreName(int id);
+
+        Decimal GetRate(int id);
+
     }
 }

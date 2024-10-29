@@ -1,0 +1,90 @@
+﻿@model Movie;
+
+@{
+    ViewData["Title"] = "Movie Details";
+}
+
+<div class="container">
+    <div class="row" style="background-image: url(@Model.BackdropUrl)">
+        <div class="col-4">
+            <div class="card">
+                <img src="@Model.PosterUrl" alt="..." />
+            </div>
+        </div>
+        <div class="col text-white">
+            <h4>@Model.Title</h4>
+            <p>@Model.Tagline</p>
+            <h6>@Model.RunTime m | @($"{Model.ReleaseDate:yyyy}") 
+                @foreach (var name in ViewBag.GenreNames)
+                {
+                    <span class="badge bg-secondary">@name</span>
+                }
+            </h6>
+            <h6><span class="badge bg-success">Rating</span></h6>
+            <h6>@Model.Overview</h6>
+        </div>
+        <div class="col">
+            <div class="row">
+                <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#ReviewModal">REVIEW</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#BuyModal">Buy @Model.Price</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h5>MOVIE FACTS</h5>
+            <h6>Release Date <span class="badge bg-secondary">@Model.ReleaseDate</span></h6>
+            <hr />
+            <h6>RunTime <span class="badge bg-secondary">@Model.RunTime m</span></h6>
+            <hr />
+            <h6>Budget <span class="badge bg-secondary">$@Model.Budget</span></h6>
+            <hr />
+            <h5>TRAILERS</h5>
+            <ul class="list-group">
+                <li class="list-group-item">ttt</li>
+            </ul>
+        </div>
+        <div class="col">
+            <h5>CAST</h5>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ReviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to review?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" asp-action="Review" asp-controller="Movie" asp-route-id="@Model.Id">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="BuyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to buy this movie?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" asp-action="Buy" asp-controller="Movie" asp-route-id="@Model.Id">Purchase @Model.Price</button>
+            </div>
+        </div>
+    </div>
+</div>

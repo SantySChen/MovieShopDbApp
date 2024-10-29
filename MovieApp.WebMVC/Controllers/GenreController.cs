@@ -15,6 +15,7 @@ namespace MovieApp.WebMVC.Controllers
         public IActionResult Index()
         {
             var result = _genreService.GetAllGenre();
+            ViewData["Genres"] = _genreService.GetAllGenre();
             return View(result);
         }
 

@@ -14,6 +14,6 @@ namespace ApplicationCore.Entities
         [Required(ErrorMessage = "Name is required")]
         [Column(TypeName ="nvarchar(24)")]
         public string Name { get; set; }=string.Empty;
-        public ICollection<Movie> Movies { get; set; }
+        public ICollection<MovieGenre> MovieGenres { get; set; }
     }
 }

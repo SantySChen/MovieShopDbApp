@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
+using ApplicationCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace Infrastructure.Services
         public CastService(ICastRepository repo)
         {
             _castRepository = repo;
+        }
+
+        public Cast GetCastDetails(int id)
+        {
+            return _castRepository.GetCastDetails(id);
         }
     }
 }

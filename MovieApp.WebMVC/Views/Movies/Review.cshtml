@@ -1,0 +1,25 @@
+﻿@model Review;
+
+@{
+    ViewData["Title"] = "Review";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Review" method="post" asp-controller="Movie">
+    <div class="container">
+        <div class="my-3">
+            <select class="form-select" aria-label="Default select example" asp-for="Rating">
+                <option selected>Rating</option>
+                @for (int i = 1; i <= 10; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+        <div class="my-3">
+            <label for="ReviewText">Reviews</label>
+            <input type="text" asp-for="ReviewText" class="form-control" />
+        </div>
+        <button class="btn btn-submit">Submit</button>
+    </div>
+</form>

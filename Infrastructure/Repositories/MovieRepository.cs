@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +19,23 @@ namespace Infrastructure.Repositories
             _context = c;
         }
 
+        public IEnumerable<string> GetGenreName(int id)
+        {
+            var genreNames = from mg in _context.MovieGenres
+                             join g in _context.Genres on mg.GenreId equals g.Id
+                             where mg.MovieId == id
+                             select g.Name;
+            return genreNames.Distinct().ToList();
+        }
+
         public Movie GetHighestGrossingMovie()
         {
             return _context.Movies.OrderByDescending(x => x.Revenue).FirstOrDefault();
+        }
+
+        public decimal GetRate(int id)
+        {
+            return _context.Reviews.Where(x => x.MovieId == id).Average(x => x.Rating);
         }
 
         public IEnumerable<Movie> GetTopMovies(int number = 20)
@@ -30,7 +45,7 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Movie> GetTopRevenueMovies(int number = 20)
         {
-            return _context.Movies.OrderByDescending(x => x.Revenue).Take(number).Include(x => x.Genres).ToList();
+            return _context.Movies.OrderByDescending(x => x.Revenue).Take(number).ToList();
         }
 
         

@@ -17,12 +17,6 @@ namespace MovieApp.WebMVC.Controllers
             _movieService = movieService;
             _genreService = genreService;
         }
-
-        //public IActionResult GetHeaderPartial()
-        //{
-        //    var genres = _genreService.GetAllGenre();
-        //    return PartialView("_Header", genres);
-        //}
     
         public IActionResult Index()
         {

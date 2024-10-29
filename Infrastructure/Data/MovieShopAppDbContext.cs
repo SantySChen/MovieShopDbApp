@@ -19,6 +19,7 @@ namespace Infrastructure.Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Cast> Casts { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<MovieCast> MovieCasts { get; set; }
         public DbSet<Trailer> Trailers { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
@@ -29,6 +30,19 @@ namespace Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MovieGenre>()
+                .HasKey(f => new { f.MovieId, f.GenreId });
+
+            modelBuilder.Entity<MovieGenre>()
+                .HasOne(f => f.Genre)
+                .WithMany(u => u.MovieGenres)
+                .HasForeignKey(f => f.GenreId);
+
+            modelBuilder.Entity<MovieGenre>()
+                .HasOne(f => f.Movie)
+                .WithMany(m => m.MovieGenres)
+                .HasForeignKey(f => f.MovieId);
+
             modelBuilder.Entity<MovieCast>()
             .HasKey(mc => new { mc.MovieId, mc.CastId });
 
