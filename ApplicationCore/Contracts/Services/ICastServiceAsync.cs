@@ -12,5 +12,6 @@ namespace ApplicationCore.Contracts.Services
     {
         Task<Cast> GetCastDetailsAsync(int id);
         Task<CastWithMovies> GetByIdAsync(int id);
+
     }
 }

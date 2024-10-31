@@ -23,5 +23,7 @@ namespace ApplicationCore.Contracts.Repositories
         Task<IEnumerable<Trailer>> GetTrailersByIdAsync(int id);
 
         Task<IEnumerable<CastWithCharacter>> GetCastsAsync(int id);
+
+        Task<IEnumerable<Movie>> GetMoviesByGenreAsync(Genre genre, int pageNumber = 1, int pageSize = 30);
     }
 }

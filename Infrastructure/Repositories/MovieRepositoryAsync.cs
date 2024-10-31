@@ -46,6 +46,15 @@ namespace Infrastructure.Repositories
             return await _context.Movies.OrderByDescending(x => x.Revenue).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<Movie>> GetMoviesByGenreAsync(Genre genre, int pageNumber = 1, int pageSize = 30)
+        {
+            var movies = await _context.MovieGenres.Where(mg => mg.GenreId == genre.Id)
+                .Join(_context.Movies, mg => mg.MovieId, m => m.Id, (mg, m) => m)
+                .Distinct()
+                .ToListAsync();
+            return movies;
+        }
+
         public async Task<decimal> GetRateAsync(int id)
         {
             return await _context.Reviews.Where(x => x.MovieId == id).AverageAsync(x => x.Rating);

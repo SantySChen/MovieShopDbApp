@@ -38,6 +38,11 @@ namespace Infrastructure.Services
             return await _genreRepository.GetByIdAsync(id);
         }
 
+        public async Task<int> GetIdByNameAsync(string name)
+        {
+            return await _genreRepository.GetIdByNameAsync(name);
+        }
+
         public async Task<int> UpdateGenreAsync(Genre genre, int id)
         {
             if (genre.Id == id)

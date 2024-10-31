@@ -15,5 +15,7 @@ namespace ApplicationCore.Contracts.Services
         Task<IEnumerable<Genre>> GetAllGenreAsync();
         Task<Genre> GetGerneByIdAsync(int id);
 
+        Task<int> GetIdByNameAsync(string name);
+
     }
 }
