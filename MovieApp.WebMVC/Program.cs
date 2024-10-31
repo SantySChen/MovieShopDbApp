@@ -22,6 +22,15 @@ builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<ICastRepository, CastRepository>();
 builder.Services.AddScoped<ICastService, CastService>();
 
+// Async
+builder.Services.AddScoped<IGenreRepositoryAsync, GenreRepositoryAsync>();
+builder.Services.AddScoped<IGenreServiceAsync, GenreServiceAsync>(); 
+builder.Services.AddScoped<IMovieRepositoryAsync, MovieRepositoryAsync>();
+builder.Services.AddScoped<IMovieServiceAsync, MovieServiceAsync>();
+builder.Services.AddScoped<IReportRepositoryAsync, ReportRepositoryAsync>();
+builder.Services.AddScoped<ICastRepositoryAsync, CastRepositoryAsync>();
+builder.Services.AddScoped<ICastServiceAsync, CastServiceAsync>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

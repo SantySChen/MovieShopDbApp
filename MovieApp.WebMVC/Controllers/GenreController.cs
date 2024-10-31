@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Contracts.Services;
+﻿using ApplicationCore.Contracts.Repositories;
+using ApplicationCore.Contracts.Services;
 using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,64 +8,65 @@ namespace MovieApp.WebMVC.Controllers
     public class GenreController : Controller
     {
         private readonly IGenreService _genreService;
-        public GenreController(IGenreService genreService)
+        private readonly IGenreServiceAsync _genreServiceAsync;
+        public GenreController(IGenreService genreService, IGenreServiceAsync genreServiceAsync)
         {
             _genreService = genreService;
+            _genreServiceAsync = genreServiceAsync;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = _genreService.GetAllGenre();
-            ViewData["Genres"] = _genreService.GetAllGenre();
+            var result = await _genreServiceAsync.GetAllGenreAsync();
             return View(result);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Genre genre)
+        public async Task<IActionResult> Create(Genre genre)
         {
             if(ModelState.IsValid)
             {
-                _genreService.AddGenre(genre);
+                await _genreServiceAsync.AddGenreAsync(genre);
                 return RedirectToAction("Index");
             }
             return View(genre);
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var result = _genreService.GetGenreById(id);
+            var result = await _genreServiceAsync.GetGerneByIdAsync(id);
             return View(result);
         }
 
         [HttpPost]
-        public IActionResult Edit(Genre genre)
+        public async Task<IActionResult> Edit(Genre genre)
         {
             if(ModelState.IsValid)
             {
-                _genreService.UpdateGenre(genre, genre.Id);
+                await _genreServiceAsync.UpdateGenreAsync(genre, genre.Id);
                 return RedirectToAction("Index");
             }
             return View(genre);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _genreService.GetGenreById(id);
+            var result = await _genreServiceAsync.DeleteGenreAsync(id);
             return View(result);
         }
 
         [HttpPost]
-        public IActionResult Delete(Genre genre)
+        public async Task<IActionResult> Delete(Genre genre)
         {
-            _genreService.DeleteGenre(genre.Id);
+            await _genreServiceAsync.DeleteGenreAsync(genre.Id);
             return RedirectToAction("Index");
         }   
 

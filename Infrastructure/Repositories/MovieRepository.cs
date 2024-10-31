@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +18,19 @@ namespace Infrastructure.Repositories
         public MovieRepository(MovieShopAppDbContext c) : base(c)
         {
             _context = c;
+        }
+
+        public IEnumerable<CastWithCharacter> GetCasts(int id)
+        {
+            var casts = from mc in _context.MovieCasts
+                        join c in _context.Casts on mc.CastId equals c.Id
+                        where mc.MovieId == id
+                        select new CastWithCharacter
+                        {
+                            Cast = c,
+                            Character = mc.Character
+                        };
+            return casts.ToList();
         }
 
         public IEnumerable<string> GetGenreName(int id)
@@ -48,6 +62,9 @@ namespace Infrastructure.Repositories
             return _context.Movies.OrderByDescending(x => x.Revenue).Take(number).ToList();
         }
 
-        
+        public IEnumerable<Trailer> GetTrailersById(int id)
+        {
+            return _context.Trailers.Where(t => t.Movie.Id == id).ToList();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
 using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,16 @@ namespace Infrastructure.Services
         public int AddReview(Review review)
         {
             return _reportRepository.Insert(review); 
+        }
+
+        public IEnumerable<CastWithCharacter> GetCasts(int id)
+        {
+            return _repository.GetCasts(id);
+        }
+
+        public IEnumerable<Trailer> GetTrailersById(int id)
+        {
+            return _repository.GetTrailersById(id);
         }
     }
 }

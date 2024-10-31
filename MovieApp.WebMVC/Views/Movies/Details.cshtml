@@ -42,12 +42,35 @@
             <h6>Budget <span class="badge bg-secondary">$@Model.Budget</span></h6>
             <hr />
             <h5>TRAILERS</h5>
-            <ul class="list-group">
-                <li class="list-group-item">ttt</li>
+            <ul class="list-group list-group-flush">
+                @foreach (var trailer in ViewBag.Trailers)
+                {
+                    <li class="list-group-item" style="background-color: #edede9;">
+                        <div style="display: flex;">
+                            <i class="fab fa-youtube" style="width: 50px;"></i>
+                            <a href="@trailer.TrailerUrl" style="text-decoration: none;"><p>@trailer.Name</p></a>
+                        </div>
+                    </li>
+                }
             </ul>
         </div>
         <div class="col">
             <h5>CAST</h5>
+            <ul class="list-group list-group-flush">
+                @foreach (var item in ViewBag.CastWithCharacter)
+                {
+                    <li class="list-group-item">
+                        <div class='actor' style="display:flex;  align-items: center;">
+                            <a asp-controller="Cast" asp-action="Detail" asp-route-id="@item.Cast.Id">
+                                <img src="@item.Cast.ProfilePath" style=" width: 60px; height:60px; border-radius:30px; margin-right: 80px;" onclick="" />
+                            </a>
+                            <div style="width: 300px;"><p>@item.Cast.Name</p></div>
+                            <div><p>@item.Character</p></div>
+
+                        </div>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>

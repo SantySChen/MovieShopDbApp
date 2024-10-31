@@ -10,18 +10,17 @@ namespace MovieApp.WebMVC.Controllers
     public class HomeController : Controller
     {
         private readonly IMovieService _movieService;
-        private readonly IGenreService _genreService;
+        private readonly IMovieServiceAsync _movieServiceAsync;
 
-        public HomeController(IMovieService movieService, IGenreService genreService)
+        public HomeController(IMovieService movieService, IMovieServiceAsync movieServiceAsync)
         {
             _movieService = movieService;
-            _genreService = genreService;
+            _movieServiceAsync = movieServiceAsync;
         }
     
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = _movieService.GetTopMovies(24);
-            ViewData["Genres"] = _genreService.GetAllGenre();
+            var result = await _movieServiceAsync.GetTopMoviesAsync(24);
             return View(result);
         }
 

@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace ApplicationCore.Contracts.Services
         decimal GetRate(int id);
 
         int AddReview(Review review);
+
+        IEnumerable<Trailer> GetTrailersById(int id);
+
+        IEnumerable<CastWithCharacter> GetCasts(int id);
 
     }
 }

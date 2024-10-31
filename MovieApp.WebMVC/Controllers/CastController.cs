@@ -6,20 +6,19 @@ namespace MovieApp.WebMVC.Controllers
     public class CastController : Controller
     {
         private readonly ICastService _castService;
+        private readonly ICastServiceAsync _castServiceAsync;
 
-        public CastController(ICastService castService)
+        public CastController(ICastService castService, ICastServiceAsync castServiceAsync)
         {
             _castService = castService;
+            _castServiceAsync = castServiceAsync;
         }
 
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
-        }
-
-        public IActionResult Details()
-        {
-            return View();
+            var CastDetails = await _castServiceAsync.GetByIdAsync(id);
+            return View(CastDetails);
         }
     }
 }

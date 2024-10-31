@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Repositories
 {
-    public interface ICastRepository : IRepository<Cast>
+    public interface ICastRepositoryAsync : IRepositoryAsync<Cast>
     {
-        CastWithMovies GetById(int id);
-        Cast GetCastDetails(int id);
+        Task<CastWithMovies> GetByIdAsync(int id);
+        Task<Cast> GetCastDetailsAsync(int id);
     }
 }

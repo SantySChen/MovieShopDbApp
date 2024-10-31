@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Services
 {
-    public interface ICastService
+    public interface ICastServiceAsync
     {
-        Cast GetCastDetails(int id);
-
-        CastWithMovies GetById(int id);
+        Task<Cast> GetCastDetailsAsync(int id);
+        Task<CastWithMovies> GetByIdAsync(int id);
     }
 }
